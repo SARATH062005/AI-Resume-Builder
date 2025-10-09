@@ -1,0 +1,54 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\hypersetup{colorlinks=true, urlcolor=blue}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    {\Huge \textbf{ {{ name }} }}
+    \vspace{5pt}
+    {{ phone }} $\cdot$ \href{mailto:{{ email }}}{ {{ email }} } $\cdot$ \href{https://linkedin.com/in/{{ linkedin }}}{linkedin.com/in/{{ linkedin }}}
+\end{center}
+
+\block{for section in sections}
+    \block{if section.type == 'summary'}
+        \section*{Summary}
+        {{ section.content | safe }}
+    \block{elif section.type == 'experience'}
+        \section*{Work Experience}
+        \hrule\vspace{8pt}
+        \block{for job in section.content}
+            \textbf{ {{ job.title }} } \hfill {{ job.years }} \\
+            \textit{ {{ job.company }} }, {{ job.location }}
+            \begin{itemize}\setlength\itemsep{-0.5em}
+            \block{for item in job.description.split('\n')}
+                \item {{ item | safe }}
+            \block{endfor}
+            \end{itemize}\vspace{5pt}
+        \block{endfor}
+    \block{elif section.type == 'education'}
+        \section*{Education}
+        \hrule\vspace{8pt}
+        \block{for edu in section.content}
+            \textbf{ {{ edu.degree }} } \hfill {{ edu.years }} \\
+            \textit{ {{ edu.university }} }\vspace{5pt}
+        \block{endfor}
+    \block{elif section.type == 'skills'}
+        \section*{Skills}
+        \hrule\vspace{8pt}
+        {{ section.content | safe }}
+    \block{elif section.type == 'custom'}
+        \section*{ {{ section.title }} }
+        \hrule\vspace{8pt}
+        {{ section.content | safe }}
+    \block{endif}
+\block{endfor}
+
+\vfill
+\center{\footnotesize Last updated: \today}
+
+\end{document}

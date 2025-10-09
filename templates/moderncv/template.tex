@@ -1,0 +1,46 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+\moderncvstyle{classic}
+\moderncvcolor{blue}
+\microtypesetup{expansion=false}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper,left=2cm,right=2cm,top=1cm,bottom=2cm}
+
+\name{ {{ name }} }{}
+\phone[mobile]{ {{ phone }} }
+\email{ {{ email }} }
+\social[linkedin]{ {{ linkedin }} }
+
+\begin{document}
+\makecvtitle
+
+\block{for section in sections}
+    \block{if section.type == 'summary'}
+        \section{Summary}
+        \cvitem{}{ {{ section.content | safe }} }
+    \block{elif section.type == 'experience'}
+        \section{Work Experience}
+        \block{for job in section.content}
+            \cventry{ {{ job.years }} }{ {{ job.title }} }{ {{ job.company }} }{ {{ job.location }} } {}{
+            \begin{itemize}
+            \block{for item in job.description.split('\n')}
+                \item {{ item | safe }}
+            \block{endfor}
+            \end{itemize}
+            }
+        \block{endfor}
+    \block{elif section.type == 'education'}
+        \section{Education}
+        \block{for edu in section.content}
+            \cventry{ {{ edu.years }} }{ {{ edu.degree }} }{ {{ edu.university }} }{}{}{}
+        \block{endfor}
+    \block{elif section.type == 'skills'}
+        \section{Skills}
+        \cvitem{}{ {{ section.content | safe }} }
+    \block{elif section.type == 'custom'}
+        \section{ {{ section.title }} }
+        \cvitem{}{ {{ section.content | safe }} }
+    \block{endif}
+\block{endfor}
+
+\end{document}
