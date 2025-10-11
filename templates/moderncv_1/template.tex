@@ -1,0 +1,72 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{url}
+\usepackage{parskip}
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9]{geometry}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\usepackage{supertabular}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{multirow}
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{10pt}
+\usepackage[unicode, draft=false]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\usepackage{fontawesome5}
+
+\newenvironment{joblong}[2]
+    {\begin{tabularx}{\linewidth}{@{}l X r@{}}\textbf{#1} & \hfill &  #2 \\[3.75pt]\end{tabularx}
+    \begin{minipage}[t]{\linewidth}\begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]}
+    {\end{itemize}\end{minipage}}
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+\Huge{ {{ name }} } \\[7.5pt]
+\href{https://linkedin.com/in/{{ linkedin }}}{\raisebox{-0.05\height}\faLinkedin\ {{ linkedin }}} \ $|$ \ 
+\href{mailto:{{ email }}}{\raisebox{-0.05\height}\faEnvelope \ {{ email }}} \ $|$ \ 
+\href{tel:{{ phone }}}{\raisebox{-0.05\height}\faMobile \ {{ phone }}} \\
+\end{tabularx}
+
+\block{for section in sections}
+    \block{if section.type == 'summary'}
+        \section{Summary}
+        {{ section.content | safe }}
+    \block{elif section.type == 'experience'}
+        \section{Work Experience}
+        \block{for job in section.content}
+            \begin{joblong}{ {{ job.title }} at {{ job.company }} }{ {{ job.years }} }
+                \block{for item in job.description.split('\n')}
+                    \item {{ item | safe }}
+                \block{endfor}
+            \end{joblong}
+        \block{endfor}
+    \block{elif section.type == 'education'}
+        \section{Education}
+        \begin{tabularx}{\linewidth}{@{}l X@{}}	
+        \block{for edu in section.content}
+            {{ edu.years }} & {{ edu.degree }} at \textbf{ {{ edu.university }} } \\
+        \block{endfor}
+        \end{tabularx}
+    \block{elif section.type == 'skills'}
+        \section{Skills}
+        \begin{tabularx}{\linewidth}{@{}X@{}}
+        {{ section.content | safe }}
+        \end{tabularx}
+    \block{elif section.type == 'custom'}
+        \section{ {{ section.title }} }
+        {{ section.content | safe }}
+    \block{endif}
+\block{endfor}
+
+\vfill
+\center{\footnotesize Last updated: \today}
+
+\end{document}
