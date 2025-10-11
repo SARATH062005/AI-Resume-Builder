@@ -12,7 +12,7 @@ def launch_app():
         webengine_available = False
     
     # Simple, direct import now
-    from main_window import MainWindow 
+    from app.main_window import MainWindow 
     
     from logger_setup import setup_logging
     import logging

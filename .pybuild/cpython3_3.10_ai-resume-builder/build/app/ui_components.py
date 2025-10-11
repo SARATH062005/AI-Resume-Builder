@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import (
     QGroupBox, QVBoxLayout, QHBoxLayout, QPushButton, QLineEdit,
-    QTextEdit, QFormLayout, QDialog, QLabel,
+    QTextEdit, QFormLayout, QDialog, QLabel, QScrollArea, QWidget,
+    QDialogButtonBox
 )
 from PyQt6.QtCore import Qt
 
@@ -30,6 +31,62 @@ class SectionWidget(QGroupBox):
         
         self.main_layout.addLayout(control_layout)
         self.main_layout.addLayout(self.content_layout)
+
+class AddCustomSectionDialog(QDialog):
+    """A dialog to create a custom section with a title and user-defined fields."""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Add Custom Section")
+        self.setMinimumWidth(400)
+        
+        self.main_layout = QVBoxLayout(self)
+        
+        # Section Title
+        self.main_layout.addWidget(QLabel("Section Title:"))
+        self.title_input = QLineEdit()
+        self.main_layout.addWidget(self.title_input)
+        
+        # Fields Section
+        self.main_layout.addWidget(QLabel("Fields for this section:"))
+        self.fields_layout = QVBoxLayout()
+        
+        add_field_button = QPushButton("＋ Add Field")
+        add_field_button.clicked.connect(self.add_field_input)
+        self.main_layout.addWidget(add_field_button)
+        self.main_layout.addLayout(self.fields_layout)
+        
+        # Add one field by default
+        self.add_field_input()
+        
+        # OK and Cancel buttons
+        button_box = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
+        button_box.accepted.connect(self.accept)
+        button_box.rejected.connect(self.reject)
+        self.main_layout.addWidget(button_box)
+
+    def add_field_input(self):
+        field_input = QLineEdit()
+        field_input.setPlaceholderText(f"Field Name {self.fields_layout.count() + 1} (e.g., Award Name)")
+        self.fields_layout.addWidget(field_input)
+
+    def get_data(self):
+        """Returns the dialog data if validation passes."""
+        title = self.title_input.text().strip()
+        if not title:
+            return None # Validation failed
+
+        fields = []
+        for i in range(self.fields_layout.count()):
+            widget = self.fields_layout.itemAt(i).widget()
+            if widget and isinstance(widget, QLineEdit):
+                field_text = widget.text().strip()
+                if field_text:
+                    fields.append(field_text)
+        
+        if not fields:
+            return None # Validation failed
+
+        return {"title": title, "fields": fields}
 
 class ATSResultsDialog(QDialog):
     """A custom dialog to display ATS check results beautifully."""

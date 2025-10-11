@@ -1,7 +1,22 @@
-2025-10-09 18:19:16 - INFO - Application starting...
-2025-10-09 18:19:17 - INFO - Application has started successfully.
-2025-10-09 18:19:18 - INFO - User paused typing. Updating live preview...
-2025-10-09 18:19:18 - INFO - Successfully gathered all data from UI forms in dynamic order.
-2025-10-09 18:19:18 - INFO - Starting PDF generation (Preview: True) with template: 'moderncv'.
-2025-10-09 18:19:22 - INFO - PDF generated successfully at: D:\AI-Resume_Builder\output\_preview.pdf
-2025-10-09 18:19:55 - INFO - 'Check ATS Score' button clicked.
+2025-10-11 12:12:42 - INFO - Application starting...
+2025-10-11 12:12:42 - INFO - Application has started successfully.
+2025-10-11 12:12:43 - INFO - User paused typing. Updating live preview...
+2025-10-11 12:12:43 - INFO - Successfully gathered 4 sections from UI.
+2025-10-11 12:12:43 - INFO - Starting PDF generation (Preview: True) with template: 'moderncv'.
+2025-10-11 12:12:44 - INFO - PDF generated successfully at: /home/sarath/AI-Resume-Builder/output/_preview.pdf
+2025-10-11 12:12:46 - INFO - 'Save Final PDF' button clicked.
+2025-10-11 12:12:46 - INFO - Successfully gathered 4 sections from UI.
+2025-10-11 12:12:46 - INFO - Starting PDF generation (Preview: False) with template: 'moderncv'.
+2025-10-11 12:12:47 - INFO - PDF generated successfully at: /home/sarath/AI-Resume-Builder/output/resume_20251011_121246.pdf
+2025-10-11 12:12:53 - INFO - User paused typing. Updating live preview...
+2025-10-11 12:12:53 - INFO - Successfully gathered 4 sections from UI.
+2025-10-11 12:12:53 - INFO - Starting PDF generation (Preview: True) with template: 'moderncv_1'.
+2025-10-11 12:12:53 - INFO - PDF generated successfully at: /home/sarath/AI-Resume-Builder/output/_preview.pdf
+2025-10-11 12:12:59 - INFO - User paused typing. Updating live preview...
+2025-10-11 12:12:59 - INFO - Successfully gathered 5 sections from UI.
+2025-10-11 12:12:59 - INFO - Starting PDF generation (Preview: True) with template: 'moderncv_1'.
+2025-10-11 12:13:00 - INFO - PDF generated successfully at: /home/sarath/AI-Resume-Builder/output/_preview.pdf
+2025-10-11 12:13:04 - INFO - User paused typing. Updating live preview...
+2025-10-11 12:13:04 - INFO - Successfully gathered 5 sections from UI.
+2025-10-11 12:13:04 - INFO - Starting PDF generation (Preview: True) with template: 'moderncv_1'.
+2025-10-11 12:13:04 - INFO - PDF generated successfully at: /home/sarath/AI-Resume-Builder/output/_preview.pdf

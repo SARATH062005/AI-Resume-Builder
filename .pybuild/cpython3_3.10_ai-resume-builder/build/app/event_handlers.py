@@ -6,11 +6,13 @@ import logging
 from PyQt6.QtWidgets import QMessageBox, QInputDialog
 from PyQt6.QtCore import QUrl
 
-# Direct imports from sibling files
+# Imports for services now in the parent directory
 from latex_service import generate_latex_resume
 from openrouter_service import get_targeted_ai_suggestion, get_ats_score_and_feedback
-from ui_components import ATSResultsDialog
-from data_handler import gather_data
+
+# Imports for modules now within the same 'app' package
+from app.ui_components import ATSResultsDialog
+from app.data_handler import gather_data
 
 logger = logging.getLogger()
 
@@ -18,11 +20,7 @@ class EventHandlers:
     def __init__(self, main_window):
         self.win = main_window
 
-    # ... (ALL OTHER METHODS IN THIS CLASS ARE IDENTICAL TO THE PREVIOUS VERSION)
-    # ... PASTE THE REST OF THE EventHandlers CLASS CODE HERE ...
     def schedule_preview_update(self, *args, **kwargs):
-        # Accept arbitrary args so this can be connected directly to PyQt signals
-        # like textChanged which may pass the new text.
         self.win.preview_timer.start()
 
     def update_live_preview(self):

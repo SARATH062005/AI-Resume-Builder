@@ -10,13 +10,16 @@ def get_targeted_ai_suggestion(api_key, job_role, resume_data, target_field, job
     if not api_key:
         return "Error: API key is not set."
 
+    # *** MODIFICATION: Add logic for the 'skills' target_field ***
     if target_field == "summary":
         task_instruction = "Generate a concise and impactful professional summary (2-4 sentences)."
+    elif target_field == "skills":
+        task_instruction = "Generate a comma-separated list of key technical and soft skills relevant to the target job."
     elif target_field == "experience_description" and job_context:
         task_instruction = (f"Rewrite the work experience description for the role of '{job_context.get('title')}' "
                             f"at '{job_context.get('company')}'. Focus on quantifiable achievements and use professional, action-oriented bullet points.")
     else:
-        return "Error: Invalid target field for AI suggestion."
+        return f"Error: Invalid target field '{target_field}' for AI suggestion."
 
     prompt = f"""
     You are an expert resume writer. Based on the full resume data provided below and for the target job role of "{job_role}", perform the following task:
